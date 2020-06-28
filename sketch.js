@@ -39,14 +39,9 @@ function setup(){
 
     bird = new Bird(100,100);
 
-    var options = {
-    bodyA:bird.body,
-    bodyB:log6.body,
-    stiffness:0.07,length:10
-    }
-var chain = Constraint.create(options);
-World.add(world,chain )
+    slingshot= new Sling(bird.body,{x:200,y:50});
 }
+   
 
 function draw(){
     background(backgroundImg);
@@ -71,5 +66,17 @@ function draw(){
     log6.display();
     bird.display();
     platform.display();
-    line (bird.body.position.x,bird.body.position.y,log6.body.position.x,log6.body.position.y)
+    slingshot.display();
+}
+function mouseDragged(){
+
+Matter.Body.setPosition(bird.body,{x:mouseX,y:mouseY});
+
+}
+
+function mouseReleased(){
+
+slingshot.fly();
+
+
 }
